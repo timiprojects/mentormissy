@@ -2,13 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { Http, Headers } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+
+  constructor(private http: HttpClient, private _http: Http) { }
 
   getLatestEvent () {
     return this.http.get('https://mmissy.herokuapp.com/api/v1/latest/');
@@ -16,6 +23,10 @@ export class EventsService {
 
   getAll() {
     return this.http.get('https://mmissy.herokuapp.com/api/v1/event/');
+  }
+
+  sendMail (body: any) {
+    return this.http.get('https://miteda.herokuapp.com/mail/send'+body,this.httpOptions);
   }
 }
 

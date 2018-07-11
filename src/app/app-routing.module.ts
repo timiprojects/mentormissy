@@ -19,6 +19,11 @@ const routes: Routes = [
       pathMatch: 'full'
   },
   {
+    path: '/:id',
+    redirectTo: '**',
+    pathMatch: 'full'
+  },
+  {
       path: 'about',
       component: AboutComponent
   },
